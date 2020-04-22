@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}subscriber{% endblock title %}
+
+{% block content %}
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <h3>Messages from PubSub</h3>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <h1 class="display-3">Mensagens</h1>
+            <ul class="list-group">
+                {% for post in posts %}
+                    <li class="list-group-item">
+                        <span class="badge badge-dark">{{ post.id }}</span> {{ post.message }} - {{ post.topic }} - {{ post.username }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}

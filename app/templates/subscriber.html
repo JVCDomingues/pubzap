@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}subscriber{% endblock title %}
+
+{% block content %}
+<!--<br>-->
+
+{% for post in posts %}
+    {% if post.username == username %}
+         <!-- mensagens enviadas -->
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-3"></div>
+
+            <div class="col-md-4">
+                <div class="alert alert-info" role="alert">
+                    <span class="text-left text-danger"><small><strong>{{ post.username }}</strong></small></span>
+                    {% if '.jpg' in post.message or 'png' in post.message or '.jpeg' in post.message %}
+                        <p class="text-left">
+                            <a href="{{ post.message }}" target="_blank">
+                                <img class="img-thumbnail" src="{{ post.message }}" alt="image">
+                            </a>
+                        </p>
+                    {% elif 'http://' in post.message or 'https://' in post.message %}
+                        <p class="text-left">
+                            <a href="{{ post.message }}" target="_blank">{{ post.message }}</a>
+                        </p>
+                    {% else %}
+                        <p class="text-left">{{ post.message }}</p>
+                    {% endif %}
+                    <p class="text-right"><small class="text-right">{{ post.created_at }}</small></p>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <!-- mensagens recebidas -->
+        <div class="row">
+            <div class="col-md-3"></div>
+
+            <div class="col-md-4">
+                <div class="alert alert-secondary" role="alert">
+                    <span class="text-left text-primary"><small><strong>{{ post.username }}</strong></small></span>
+                    {% if '.jpg' in post.message or 'png' in post.message or '.jpeg' in post.message %}
+                        <p class="text-left">
+                            <a href="{{ post.message }}" target="_blank">
+                                <img class="img-thumbnail" src="{{ post.message }}" alt="image">
+                            </a>
+                        </p>
+                    {% elif 'http://' in post.message or 'https://' in post.message %}
+                        <p class="text-left">
+                            <a href="{{ post.message }}" target="_blank">{{ post.message }}</a>
+                        </p>
+                    {% else %}
+                        <p class="text-left">{{ post.message }}</p>
+                    {% endif %}
+                    <p class="text-right"><small class="text-right">{{ post.created_at }}</small></p>
+                </div>
+            </div>
+
+            <div class="col-md-2"></div>
+        </div>
+    {% endif %}
+{% endfor %}
+
+
+{% block script %}
+    <script>
+        window.scrollTo(0, 2000);
+        setInterval(function(){
+            location.reload();
+        }, 5000);
+    </script>
+{% endblock script %}
+
+{% endblock content %}
